@@ -1,16 +1,17 @@
-Sätta upp 15 projekt med två floating ips färdigbokade och dit pekar också dns. <ANDERS>
-Sätta upp DNS-namn som pekar på en range av floating IPs som vi ser till att binda till workshop-projeketen. <ANDERS>
+# todo before conference
+
+Sätta upp 15 projekt med två floating ips färdigbokade och dit pekar också dns. _ANDERS_
+Sätta upp DNS-namn som pekar på en range av floating IPs som vi ser till att binda till workshop-projeketen. _ANDERS_
 Ska projektet heta samma sak som den DNS-entry man pekar till adressen i projektet? Ja.
-Sätta upp public GitHub-projekt med att filer som behövs. safespring/nextcloud-demo <ANDERS>
+Sätta upp public GitHub-projekt med att filer som behövs. safespring/nextcloud-demo _ANDERS_
 
-Skapa en provisioneringsnod (installera OpenStack API-klienter och ladda ned och installera Terraform-binär). <GABRIEL>
+Skapa en provisioneringsnod (installera OpenStack API-klienter och ladda ned och installera Terraform-binär). _GABRIEL_
 
-Skapa terraform-skript för att sätta upp Nextcloud-servern. <ANDERS>
+Skapa terraform-skript för att sätta upp Nextcloud-servern. _ANDERS_
 
+Lägg upp följande i en textfil i Git-repot. Dubbelkolla vilken fil man ska lägga in virtual host: _GABRIEL_
 
-
-Lägg upp följande i en textfil i Git-repot. Dubbelkolla vilken fil man ska lägga in virtual host: <GABRIEL>
-
+```bash
 sudo apt update && sudo apt upgrade -y
 
 sudo snap install nextcloud
@@ -21,28 +22,28 @@ sudo nextcloud.manual-install user password
 sudo nextcloud.occ config:system:get trusted_domains
 
 sudo nextcloud.occ config:system:set trusted_domains 1 --value=hostname.domain.com
+```
 
 Set till att servern går att nå över 80 och 443 och att det finns ett namn som pekar på IP-adressen
 
+```bash
 sudo nextcloud.enable-https lets-encrypt
 
 Have you met these requirements? (y/n) y
 Please enter an email address (for urgent notices or key recovery): <email>
 Please enter your domain name(s) (space-separated): hostname.domain.com
+```
 
 Surfa till https://hostname.domain.com och logga in.
 
-
-
-
-
 På collabora-servern.
+
+```bash
 sudo apt install docker.io
 certbot -d collabora.domain.com
 
-
 docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=hostname\\.domain\\.com' -e 'dictionaries=en se no' --restart always --cap-add MKNOD collabora/code
-
+```
 
 ```code
 <VirtualHost *:443>
@@ -92,10 +93,7 @@ ProxyPassReverse    /lool https://127.0.0.1:9980/lool
 ProxyPass           /hosting/capabilities https://127.0.0.1:9980/hosting/capabilities retry=0
 ProxyPassReverse    /hosting/capabilities https://127.0.0.1:9980/hosting/capabilities
 </VirtualHost>
-
 ```
 
 I Nextcloud - gå till Apps och välj "Disabled" och slå på External Storage.
 Gå sedan till inställningar och fyll i bucket, hostname, access key och secret key.
-
-
