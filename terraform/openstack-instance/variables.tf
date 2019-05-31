@@ -23,7 +23,7 @@ variable "centos" {
   type = "map"
   description = "UUID of desired Centos image"
   default = {
-    "no" = "cb77ffa4-b77a-453f-9602-500a0b7613ef"
+    "no" = "c6a74f87-259d-4c98-8844-d27a039eba36"
     "se" = "a8ca4409-422b-4554-adc0-bbdb48d552fc"
   }
 }
@@ -51,7 +51,7 @@ variable "node_flavor" {
   default = "b.tiny"
 }
 variable "centos_image" {
-  default = "cb77ffa4-b77a-453f-9602-500a0b7613ef"
+  default = "c6a74f87-259d-4c98-8844-d27a039eba36"
 }
 
 variable "names" {
