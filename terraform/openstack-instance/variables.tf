@@ -54,6 +54,10 @@ variable "centos_image" {
   default = "c6a74f87-259d-4c98-8844-d27a039eba36"
 }
 
+variable "ubuntu_image" {
+  default = "4479bd54-b224-4ce2-b250-694b0679a039"
+}
+
 variable "names" {
   type = "list"
 }

@@ -14,9 +14,9 @@ Edit the file _openstack.sh_ and fill inn your username, projectname and passwor
 eval `bash openstack.sh`
 ```
 
-Then enter the terraform directory. You can look through the files if you want.
+Then enter the terraform directory. We need to edit a few variables. Open the _nextcloud.auto.tfvars_ file, and edit env_name to something more personal, and replace the IP adresses whith the two adresses assigned to you.
 
-Run terraform with:
+Then run terraform with:
 
 ```bash
 terraform init
@@ -26,9 +26,9 @@ terraform apply
 
 (you will see a lot of output from these steps)
 
-Inspect what you have created in the console
+Inspect what you have created in the web console
 
-In the terraform step, we created a ssh keypair. We are going to need it for later use. Export it with: 
+In the terraform step, we created a ssh keypair. We are going to need it for later use. Export it with:
 
 ```bash
 terraform output ssh_private_key > terraform.key
@@ -38,5 +38,5 @@ chmod 700 terraform.key
 Now you should be able to ssh to your newly created server with:
 
 ```bash
-$ ssh <ip-address-from-output> -l centos -i terraform.key
+$ ssh -i terraform.key -l ubuntu <ip-address of your instance>
 ```

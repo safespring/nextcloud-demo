@@ -7,7 +7,7 @@ resource "openstack_compute_instance_v2" "os_instance" {
     count = "${var.number_of_instances}"
     name = "${var.names[count.index]}"
     region = "${var.region}"
-    image_id = "${var.centos_image}"
+    image_id = "${var.ubuntu_image}"
     flavor_name = "${var.node_flavor}"
     key_pair = "${var.keypair}"
     security_groups = [
@@ -26,7 +26,7 @@ resource "openstack_compute_instance_v2" "os_instance" {
         delete_on_termination = true
         source_type = "image"
         destination_type = "local"
-        uuid = "${var.centos_image}"
+        uuid = "${var.ubuntu_image}"
     }
     lifecycle {
       ignore_changes = ["user_data","id"]
