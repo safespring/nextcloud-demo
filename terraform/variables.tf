@@ -17,3 +17,6 @@ variable "region" {
     type = "string"
     default = "no-south-1"
 }
+
+variable "nextcloud_ip" {}
+variable "collabora_ip" {}

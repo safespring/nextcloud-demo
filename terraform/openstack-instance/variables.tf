@@ -61,3 +61,5 @@ variable "names" {
 variable "user_data" {
   default = "#cloud-config\n"
 }
+
+variable "floating_ip_address" {}

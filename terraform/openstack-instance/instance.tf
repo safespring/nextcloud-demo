@@ -39,7 +39,7 @@ resource "openstack_compute_floatingip_v2" "os_instance" {
 }
 resource "openstack_compute_floatingip_associate_v2" "os_instance" {
     count = "${var.number_of_instances}"
-    floating_ip = "${openstack_compute_floatingip_v2.os_instance.*.address[count.index]}"
+    floating_ip = "${var.floating_ip_address}"
     instance_id = "${openstack_compute_instance_v2.os_instance.*.id[count.index]}"
 }
 

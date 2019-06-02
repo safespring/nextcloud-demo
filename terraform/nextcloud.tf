@@ -13,6 +13,14 @@ module "nextcloud-network" {
     env_name = "${var.env_name}"
 }
 
+data "openstack_networking_floatingip_v2" "nextcloud_ip" {
+  address = "${var.nextcloud_ip}"
+}
+
+data "openstack_networking_floatingip_v2" "collabora_ip" {
+  address = "${var.collabora_ip}"
+}
+
 module "nextcloud-instance" {
     source = "./openstack-instance"
     keypair = "${module.ssh_keypair.name}"
@@ -21,6 +29,7 @@ module "nextcloud-instance" {
     ssh_security_group = "${module.nextcloud-network.ssh_security_group}"
     network_id = "${module.nextcloud-network.network_id}"
     env_name = "${var.env_name}"
+    floating_ip_address = "${data.openstack_networking_floatingip_v2.nextcloud_ip.address}"
 }
 
 module "collabora-instance" {
@@ -31,6 +40,7 @@ module "collabora-instance" {
     ssh_security_group = "${module.nextcloud-network.ssh_security_group}"
     network_id = "${module.nextcloud-network.network_id}"
     env_name = "${var.env_name}"
+    floating_ip_address = "${data.openstack_networking_floatingip_v2.nextcloud_ip.address}"
 }
 
 output "ssh_private_key" {
