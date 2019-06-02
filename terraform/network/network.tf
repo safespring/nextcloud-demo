@@ -26,6 +26,17 @@ resource "openstack_networking_secgroup_v2" "ssh_access" {
     description = "Security group for allowing SSH access"
 }
 
+resource "openstack_networking_secgroup_v2" "http_access" {
+    region = "${var.region}"
+    name = "${var.env_name}_http_access"
+    description = "Security group for allowing http access"
+}
+
+resource "openstack_networking_secgroup_v2" "https_access" {
+    region = "${var.region}"
+    name = "${var.env_name}_https_access"
+    description = "Security group for allowing https access"
+}
 
 resource "openstack_networking_secgroup_rule_v2" "rule_ssh_access_ipv4" {
 #    count = "${length(var.allow_ssh_from_v4)}"
@@ -39,6 +50,29 @@ resource "openstack_networking_secgroup_rule_v2" "rule_ssh_access_ipv4" {
     security_group_id = "${openstack_networking_secgroup_v2.ssh_access.id}"
 }
 
+resource "openstack_networking_secgroup_rule_v2" "rule_http_access_ipv4" {
+#    count = "${length(var.allow_ssh_from_v4)}"
+    region = "${var.region}"
+    direction = "ingress"
+    ethertype = "IPv4"
+    protocol = "tcp"
+    port_range_min = 80
+    port_range_max = 80
+#    remote_ip_prefix = "${element(var.allow_ssh_from_v4, count.index)}"
+    security_group_id = "${openstack_networking_secgroup_v2.http_access.id}"
+}
+
+resource "openstack_networking_secgroup_rule_v2" "rule_https_access_ipv4" {
+#    count = "${length(var.allow_ssh_from_v4)}"
+    region = "${var.region}"
+    direction = "ingress"
+    ethertype = "IPv4"
+    protocol = "tcp"
+    port_range_min = 443
+    port_range_max = 443
+#    remote_ip_prefix = "${element(var.allow_ssh_from_v4, count.index)}"
+    security_group_id = "${openstack_networking_secgroup_v2.https_access.id}"
+}
 
 output "id" {
     value = "${openstack_networking_network_v2.network_1.id}"
@@ -46,6 +80,14 @@ output "id" {
 
 output "ssh_security_group" {
     value = "${openstack_networking_secgroup_v2.ssh_access.id}"
+}
+
+output "http_security_group" {
+    value = "${openstack_networking_secgroup_v2.http_access.id}"
+}
+
+output "https_security_group" {
+    value = "${openstack_networking_secgroup_v2.https_access.id}"
 }
 
 output "network_id" {

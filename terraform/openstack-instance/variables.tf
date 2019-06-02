@@ -45,6 +45,8 @@ variable "name_prefix" {
 }
 
 variable "ssh_security_group" {}
+variable "http_security_group" {}
+variable "https_security_group" {}
 variable "network_id" {}
 variable "env_name" {}
 variable "node_flavor" {

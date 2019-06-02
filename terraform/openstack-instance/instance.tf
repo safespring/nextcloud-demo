@@ -11,8 +11,10 @@ resource "openstack_compute_instance_v2" "os_instance" {
     flavor_name = "${var.node_flavor}"
     key_pair = "${var.keypair}"
     security_groups = [
-        "default",
         "${var.ssh_security_group}",
+        "${var.http_security_group}",
+        "${var.https_security_group}",
+        "default"
     ]
     user_data = "${var.user_data}"
 

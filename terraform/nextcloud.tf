@@ -27,6 +27,8 @@ module "nextcloud-instance" {
     names = ["nextcloud"]
     user_data = "${file("nextcloud.conf")}"    
     ssh_security_group = "${module.nextcloud-network.ssh_security_group}"
+    http_security_group = "${module.nextcloud-network.http_security_group}"
+    https_security_group = "${module.nextcloud-network.https_security_group}"
     network_id = "${module.nextcloud-network.network_id}"
     env_name = "${var.env_name}"
     floating_ip_address = "${data.openstack_networking_floatingip_v2.nextcloud_ip.address}"
@@ -38,6 +40,8 @@ module "collabora-instance" {
     names = ["collabora"]
     user_data = "${file("collabora.conf")}"
     ssh_security_group = "${module.nextcloud-network.ssh_security_group}"
+    http_security_group = "${module.nextcloud-network.http_security_group}"
+    https_security_group = "${module.nextcloud-network.https_security_group}"
     network_id = "${module.nextcloud-network.network_id}"
     env_name = "${var.env_name}"
     floating_ip_address = "${data.openstack_networking_floatingip_v2.collabora_ip.address}"
