@@ -85,3 +85,11 @@ Then go to settings and enter bucket, hostname, access key and secret key.
 
 Server should be https://s3-archive.api.cloud.ipnett.no
 
+## start a collabora server
+
+```bash
+sudo apt install docker.io
+certbot -d collabora.domain.com
+
+docker run -t -d -p 127.0.0.1:9980:9980 -e 'domain=hostname\\.domain\\.com' -e 'dictionaries=en se no' --restart always --cap-add MKNOD collabora/code
+```
